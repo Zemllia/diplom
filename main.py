@@ -1,3 +1,3 @@
-import random
+import WebServer
 
-a = random.randint(0, 100)
+WebServer.run()
