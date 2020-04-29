@@ -3,6 +3,7 @@ import asyncio
 import websockets
 import json
 import DataBaseWork
+import config
 
 
 class Server:
@@ -10,11 +11,6 @@ class Server:
     port = 0
 
     sessions = []
-
-    def __init__(self, ip, port):
-
-        self.ip = ip
-        self.port = port
 
     async def hello(self, ws, path):
         json_string = await ws.recv()
@@ -55,12 +51,13 @@ class Server:
                 return ['{"Error": "%s"}' % str(e)]
 
     def start(self):
-        print("Starting server on {}:{}".format(self.ip, self.port))
-        start_server = websockets.serve(self.hello, self.ip, self.port)
+        print("Starting server on {}:{}".format(config.ip, config.port))
+        start_server = websockets.serve(self.hello, config.ip, config.port)
         print("Started server")
         asyncio.get_event_loop().run_until_complete(start_server)
         asyncio.get_event_loop().run_forever()
         print("Server closed")
+
 
     class Session:
         fio = ''
