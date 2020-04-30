@@ -30,3 +30,15 @@ def check_if_user_exists(username):
     conn.commit()
     conn.close()
     return user
+
+
+def check_permission(token):
+    conn = sqlite3.connect("database.db")
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM users WHERE user_token = '%s'" % token)
+    user = cursor.fetchone()
+    conn.commit()
+    conn.close()
+    if user is None:
+        return False
+    return True

@@ -24,8 +24,11 @@ def change_json():
             for half_rack in rack:
                 for element in half_rack["elements"]:
                     element["id"] = counter
+                    element["state"] = "active"
                     counter += 1
     f = open("lockers.json", "w", encoding='UTF-8')
     json_string = str(json_obj).replace("'", '"').replace("True", 'true')
     f.write(json_string.replace('None', 'null'))
     f.close()
+
+change_json()
