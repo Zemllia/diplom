@@ -38,7 +38,7 @@ class Server:
 
             for answer in answers:
                 await ws.send(answer)
-                print(f"sent> {answer}")
+                print("sent> %s" % str(answer))
 
     async def deploy_command(self, type_request, json_object, remote_address, USERS):
         if type_request == 'new user':
